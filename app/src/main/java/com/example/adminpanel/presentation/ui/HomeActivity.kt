@@ -1,12 +1,12 @@
 package com.example.adminpanel.presentation.ui
 
 import android.content.SharedPreferences
+import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import com.example.adminpanel.R
-import com.example.adminpanel.data.presenter_impl.HomeFragmentManagerPresenter
+import com.example.adminpanel.data.presenter_impl.HomeFragmentManagerPresenterImpl
 import com.example.adminpanel.domain.entities.User
 import com.example.adminpanel.domain.presenter.HomeFragmentManagerContract
 import com.example.adminpanel.domain.use_cases.UserFactory
@@ -23,13 +23,14 @@ import com.example.adminpanel.presentation.ui.LoginActivity.Companion.PHONE
 import com.example.adminpanel.presentation.ui.LoginActivity.Companion.TEMP_USER_DATA
 import com.example.adminpanel.presentation.ui.fragment.HomeFragment
 import com.example.adminpanel.presentation.ui.fragment.TransactionFragment
+import com.example.adminpanel.presentation.ui.fragment.TransferFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : AppCompatActivity(), HomeFragmentManagerContract.View{
 
     private lateinit var navigationBar: BottomNavigationView
 
-    private lateinit var homeFragmentManagerPresenter: HomeFragmentManagerPresenter
+    private lateinit var homeFragmentManagerPresenter: HomeFragmentManagerPresenterImpl
 
     private lateinit var sharedPreferences: SharedPreferences
 
@@ -38,25 +39,22 @@ class HomeActivity : AppCompatActivity(), HomeFragmentManagerContract.View{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        if(savedInstanceState != null){
-            PAGE = savedInstanceState.getInt(KEY_REVENUE, 0)
-        }
 
         sharedPreferences = this.getSharedPreferences(TEMP_USER_DATA, MODE_PRIVATE)
 
         getUserData()
 
-        homeFragmentManagerPresenter = HomeFragmentManagerPresenter(this)
+        homeFragmentManagerPresenter = HomeFragmentManagerPresenterImpl(this)
 
 
         navigationBar = findViewById(R.id.bottomNavigationBar)
 
-        changePage(PAGE)
+        replaceFragment(HomeFragment())
 
         navigationBar.setOnItemSelectedListener {
             when(it.itemId){
-                R.id.itemHome -> changePage(0)
-                R.id.itemTransactions -> changePage(1)
+                R.id.itemHome -> replaceFragment(HomeFragment())
+                R.id.itemTransactions -> replaceFragment(TransactionFragment())
             }
 
             return@setOnItemSelectedListener true
@@ -93,39 +91,20 @@ class HomeActivity : AppCompatActivity(), HomeFragmentManagerContract.View{
 
     }
 
-    private fun changePage(changedPage:Int){
-        when(changedPage){
-            0 -> {
-                PAGE = changedPage
-                replaceFragment(HomeFragment())
-            }
-            1 -> {
-                PAGE = changedPage
-                replaceFragment(TransactionFragment())
-            }
-        }
-    }
-
     private fun replaceFragment(selected: Fragment){
         val transaction = supportFragmentManager.beginTransaction()
 
         transaction.replace(R.id.fl_layout, selected)
+        transaction.setReorderingAllowed(true)
+        transaction.addToBackStack(null)
+
+
         transaction.commit()
     }
 
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-
-        outState.putInt(KEY_REVENUE, PAGE)
-
+    override fun onBackPressed() {
+        super.onBackPressed()
+        navigationBar.selectedItemId =  R.id.itemHome
     }
 
-    companion object{
-        const val KEY_REVENUE = "revenue_key"
-        var PAGE = 0
-
-
-
-    }
 }

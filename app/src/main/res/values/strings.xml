@@ -12,8 +12,15 @@
     <string name="transactions_menu_item">Transactions</string>
 
     <string name="available_text">Available Balance</string>
+    <string name="users_txt">Users</string>
+
+    <string name="transfer_header">Transfer</string>
+    <string name="from_text">From</string>
+    <string name="account_txt">Account</string>
+    <string name="to_txt">To</string>
+    <string name="amount_txt">Amount</string>
+    <string name="purpose_txt">Purpose</string>
+    <string name="send_btn_txt">Send</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
-    <string name="users_txt">Users</string>
 </resources>

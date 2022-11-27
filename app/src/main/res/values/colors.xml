@@ -15,10 +15,23 @@
     <color name="green_bg">#278F02</color>
     <color name="bg_color_1">#414A61</color>
 
+
     <color name="selected_item_color">#F9F9F9</color>
     <color name="item_color_text">#8D8D8D</color>
 
     <color name="txt_color_2">#F9F9F9</color>
 
     <color name="txt_color_5">#DB031952</color>
+
+
+    <color name="block_color">#292929</color>
+    <color name="border_color">#80585858</color>
+
+    <color name="txt_color_4">#99EEEEEE</color>
+
+    <color name="block_color_1">#414A61</color>
+
+    <color name="hint_color">#626262</color>
+
+
 </resources>

@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/users_txt"
                 android:textColor="@color/txt_color_2"
-                android:textSize="14sp"
+                android:textSize="20sp"
                 app:fontFamily="@font/poppins_medium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

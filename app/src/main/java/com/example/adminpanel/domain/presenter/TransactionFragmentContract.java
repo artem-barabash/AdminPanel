@@ -7,13 +7,12 @@ import java.util.List;
 
 import kotlinx.coroutines.flow.Flow;
 
-
-public interface HomeFragmentContract {
+public interface TransactionFragmentContract {
     interface Presenter{
-        Flow<List<Person>> getPersonsList();
+        Flow<List<Operation>> getOperationList();
     }
 
     interface View{
-         //void getUserList();
+        //void getUserList();
     }
 }

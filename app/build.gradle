@@ -2,6 +2,10 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
+
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id'kotlin-android-extensions'
 }
 
 android {
@@ -55,4 +59,11 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
     implementation 'androidx.fragment:fragment-ktx:1.5.4'
+
+
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt("androidx.room:room-compiler:2.4.3")
+
+    implementation 'org.parceler:parceler-api:1.1.12'
+    annotationProcessor 'org.parceler:parceler:1.1.12'
 }

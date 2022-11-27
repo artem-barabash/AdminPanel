@@ -7,27 +7,50 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.adminpanel.R
 import com.example.adminpanel.data.presenter_impl.HomeFragmentPresenterImpl
+import com.example.adminpanel.data.utilities.FireBaseManager
+import com.example.adminpanel.data.utilities.room.UserDataApplication
 import com.example.adminpanel.domain.presenter.HomeFragmentContract
 import com.example.adminpanel.domain.use_cases.UserFactory.Companion.ACCOUNT
+import com.example.adminpanel.presentation.adapter.PersonAdapter
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import java.text.NumberFormat
 import java.util.*
+import kotlin.coroutines.coroutineContext
 
 
 class HomeFragment() : Fragment(), HomeFragmentContract.View {
 
-    private lateinit var homeFragmentPresenter: HomeFragmentContract.Presenter
+    private lateinit var  homeFragmentPresenter: HomeFragmentPresenterImpl
+
 
     lateinit var textNumber:TextView
     lateinit var textBalance: TextView
     lateinit var textFullName: TextView
 
+    lateinit var recyclerViewUser: RecyclerView
+    lateinit var personAdapter: PersonAdapter
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        homeFragmentPresenter = HomeFragmentPresenterImpl(this)
+        homeFragmentPresenter = HomeFragmentPresenterImpl(
+            this,
+                (activity?.application as UserDataApplication).database.adminDao()
+        )
+
+
 
 
     }
@@ -48,7 +71,32 @@ class HomeFragment() : Fragment(), HomeFragmentContract.View {
         textFullName.text = "${ACCOUNT.firstName} ${ACCOUNT.lastName}"
         textBalance.text = NumberFormat.getCurrencyInstance(Locale.US).format(ACCOUNT.balance)
 
+
+
+        recyclerViewUser = view.findViewById(R.id.users_recycler_view)
+        recyclerViewUser.layoutManager = LinearLayoutManager(requireContext())
+
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            //Thread.sleep(3000)
+
+            homeFragmentPresenter.personsList.collect() {
+                personAdapter = PersonAdapter(requireContext(), it)
+                //println("list$it")
+
+                recyclerViewUser.adapter = personAdapter
+            }
+        }
+
+
+
         return view.rootView
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
     }
 
     private fun showCardNumber(number: String?): String? {
