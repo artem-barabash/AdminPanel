@@ -33,5 +33,7 @@
 
     <color name="hint_color">#626262</color>
 
+    <color name="blue_bg">#153ABE</color>
+
 
 </resources>

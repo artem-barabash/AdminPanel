@@ -1,9 +1,6 @@
 package com.example.adminpanel.presentation.ui.fragment
 
 import android.annotation.SuppressLint
-import android.content.Intent.getIntent
-import android.content.SharedPreferences
-import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,15 +10,19 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.adminpanel.R
+import com.example.adminpanel.data.presenter_impl.TransferFragmentPresenterImpl
+import com.example.adminpanel.domain.entities.Operation
 import com.example.adminpanel.domain.entities.Person
+import com.example.adminpanel.domain.presenter.TransferFragmentContract
+import com.example.adminpanel.presentation.ui.fragment.SuccessfulFragment.Companion.SUCCESS_OPERATION_DATA
+import com.example.adminpanel.presentation.ui.fragment.SuccessfulFragment.Companion.SUCCESS_OPERATION
 import kotlinx.android.synthetic.main.fragment_transfer.view.*
-import org.parceler.Parcels
 
 
-
-class TransferFragment : Fragment() {
+class TransferFragment : Fragment(), TransferFragmentContract.View {
 
     lateinit var buttonBack: ImageButton
     lateinit var textUserName: TextView
@@ -31,6 +32,8 @@ class TransferFragment : Fragment() {
 
     private var person: Person? = null
     private var sum:Double = 0.0
+
+    private lateinit var transferPresenter: TransferFragmentPresenterImpl
 
 
     @SuppressLint("SourceLockedOrientationActivity")
@@ -55,6 +58,8 @@ class TransferFragment : Fragment() {
         editSum = view.editTextSum
         buttonSend = view.button_send
 
+        transferPresenter = TransferFragmentPresenterImpl(this)
+
         textUserName.text = showCardNumber(person!!.number) + " - \n" + person!!.firstName + " " + person!!.lastName
 
         editSum.setText(sum.toString(), TextView.BufferType.EDITABLE)
@@ -65,6 +70,10 @@ class TransferFragment : Fragment() {
 
             transactionFragment.replace(R.id.fl_layout, HomeFragment())
             transactionFragment.commit()
+        }
+
+        buttonSend.setOnClickListener{
+            transferPresenter.enterOperation(editSum.text.toString().toDouble(), person!!)
         }
 
         return view
@@ -89,5 +98,33 @@ class TransferFragment : Fragment() {
         const val RECEIVER_SUM = "receiver_sum"
 
     }
+
+    override fun showMessage() {
+        val dialog = AlertDialog.Builder(requireContext())
+            .setTitle(R.string.app_name)
+            .setMessage(R.string.failure_payment)
+            .setIcon(R.drawable.ic_launcher_foreground)
+            .setNegativeButton("Cancel", null)
+        dialog.show()
+    }
+
+    override fun finishOperation(operation: Operation, person: Person) {
+        val fragmentManager = (context as AppCompatActivity).supportFragmentManager
+        val transactionFragment = fragmentManager.beginTransaction()
+
+        transactionFragment.setReorderingAllowed(true)
+        transactionFragment.addToBackStack(null)
+
+        val fragment = SuccessfulFragment()
+        val bundle = Bundle()
+        bundle.putParcelable(SUCCESS_OPERATION_DATA, person)
+        bundle.putParcelable(SUCCESS_OPERATION, operation)
+        fragment.arguments = bundle
+
+        transactionFragment.replace(R.id.fl_layout, fragment)
+        transactionFragment.commit()
+    }
+
+
 }
 

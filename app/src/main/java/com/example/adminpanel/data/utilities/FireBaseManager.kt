@@ -5,6 +5,7 @@ import com.example.adminpanel.domain.entities.Operation
 import com.example.adminpanel.domain.entities.Person
 import com.example.adminpanel.domain.use_cases.UserFactory.Companion.ACCOUNT
 import com.google.firebase.database.*
+import kotlin.math.roundToInt
 
 class FireBaseManager {
     private var databaseReference: DatabaseReference = FirebaseDatabase.getInstance().reference
@@ -95,6 +96,43 @@ class FireBaseManager {
                 error.toException()
             }
 
+        })
+    }
+
+    fun addOperation(operation: Operation) {
+        val operationsRef = databaseReference.child("Operation")
+
+        updateBalanceUser(operation.send, operation.sum, false)
+
+        operationsRef.child(operation.send + "-"+ operation.time.replace('.', ',')).setValue(operation)
+
+        updateBalanceUser(operation.receive, operation.sum, true)
+    }
+
+    private fun updateBalanceUser(number: String, sum: Double, operation: Boolean) {
+        databaseReference = FirebaseDatabase.getInstance().reference
+        val userRef = databaseReference.child("User")
+        val query = userRef.orderByKey().equalTo(number)
+        query.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (itemSnapshot in snapshot.children) {
+
+                    var balance = itemSnapshot.child("balance").getValue(
+                        Double::class.java
+                    )!!
+                    if (operation) {
+                        balance += sum
+                    } else {
+                        balance -= sum
+                    }
+                    userRef.child(number).child("balance")
+                        .setValue((balance * 100.00).roundToInt() / 100.00)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                throw error.toException()
+            }
         })
     }
 }

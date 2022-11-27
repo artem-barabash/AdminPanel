@@ -21,6 +21,12 @@
     <string name="amount_txt">Amount</string>
     <string name="purpose_txt">Purpose</string>
     <string name="send_btn_txt">Send</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="failure_payment">The sum is incorrect!</string>
+
+    <string name="recipient_number_title">Recipient\'s number</string>
+    <string name="transaction_successful">Transaction Successful</string>
+    <string name="detail_transaction">Detail Transaction</string>
+    <string name="share_receipt">Share Receipt</string>
+    <string name="btn_done">Done</string>
 </resources>
