@@ -38,12 +38,19 @@ android {
 
 dependencies {
 
+    implementation 'androidx.test.ext:junit-ktx:1.1.4'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation 'androidx.core:core:1.9.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    def nav_version = '2.5.2'
+
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     testImplementation 'junit:junit:4.13.2'
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
 
@@ -66,4 +73,21 @@ dependencies {
 
     implementation 'org.parceler:parceler-api:1.1.12'
     annotationProcessor 'org.parceler:parceler:1.1.12'
+
+    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    androidTestImplementation "androidx.test:core-ktx:1.5.0"
+    androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
+    androidTestImplementation 'androidx.test:runner:1.5.1'
+    androidTestUtil 'androidx.test:orchestrator:1.4.2'
+
+    implementation("org.mockito:mockito-core:4.9.0")
+    testImplementation("org.mockito:mockito-junit-jupiter:4.9.0")
+    testImplementation("org.mockito:mockito-inline:4.9.0")
+
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
+
+    testImplementation 'org.powermock:powermock:2.0.9'
+    testImplementation 'org.powermock:powermock-module-junit4:2.0.9'
+    testImplementation 'org.powermock:powermock-api-mockito:2.0.9'
 }

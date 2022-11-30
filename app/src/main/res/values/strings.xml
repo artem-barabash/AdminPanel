@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">Admin Panel</string>
+    <string name="app_name" translatable="false">Admin Panel</string>
 
     <string name="enter_email">Enter email</string>
     <string name="enter_password">Enter password</string>
     <string name="log_in">Login</string>
     <string name="failure_auth">Login or password is not correctly!</string>
     <string name="message_empty_fields">Fields can not be empty!</string>
-    <string name="empty" />
+    <string name="empty" translatable="false" />
 
     <string name="home_menu_item">Home</string>
     <string name="transactions_menu_item">Transactions</string>

@@ -6,7 +6,7 @@ import kotlinx.coroutines.Job
 interface LoginContract {
 
     interface Presenter{
-        fun exitAccount(email: String, password: String): Job
+        fun exitAccount(email: String, password: String)
 
         fun isOnline(context: Context): Boolean
     }

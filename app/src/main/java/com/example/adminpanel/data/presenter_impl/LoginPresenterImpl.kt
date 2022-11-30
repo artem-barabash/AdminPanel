@@ -41,7 +41,7 @@ class LoginPresenterImpl(
 
    lateinit var auth: FirebaseAuth
 
-    override fun exitAccount(email: String, password: String) = launch {
+    override fun exitAccount(email: String, password: String) {
         auth = FirebaseAuth.getInstance()
 
         //databaseReference = FirebaseDatabase.getInstance().reference
@@ -56,9 +56,11 @@ class LoginPresenterImpl(
                                 view.retrieveUserDataFromFireBase(email, password)
 
                                 //Thread.sleep(2000)
+
+                                view.enterToHomeActivity()
                                 view.setTextViewError(R.string.empty)
                                 view.clearFields()
-                                view.enterToHomeActivity()
+
                             }
 
 
@@ -66,6 +68,8 @@ class LoginPresenterImpl(
                     }.addOnFailureListener{
                         view.setTextViewError(R.string.failure_auth)
                     }
+            }else{
+                view.setTextViewError(R.string.failure_auth)
             }
         }else{
             view.setTextViewError(R.string.message_empty_fields)

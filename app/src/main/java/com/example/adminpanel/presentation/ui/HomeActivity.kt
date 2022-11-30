@@ -1,10 +1,12 @@
 package com.example.adminpanel.presentation.ui
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.adminpanel.R
 import com.example.adminpanel.data.presenter_impl.HomeFragmentManagerPresenterImpl
 import com.example.adminpanel.domain.entities.User
@@ -34,11 +36,14 @@ class HomeActivity : AppCompatActivity(), HomeFragmentManagerContract.View{
 
     private lateinit var sharedPreferences: SharedPreferences
 
+    private lateinit var swipeLayout:SwipeRefreshLayout
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        swipeLayout = findViewById(R.id.swipe_refresh)
 
         sharedPreferences = this.getSharedPreferences(TEMP_USER_DATA, MODE_PRIVATE)
 
@@ -61,6 +66,12 @@ class HomeActivity : AppCompatActivity(), HomeFragmentManagerContract.View{
         }
 
 
+        swipeLayout.setOnRefreshListener {
+            val i = Intent(this@HomeActivity, HomeActivity::class.java)
+            finish();
+            overridePendingTransition(0, 0);
+            startActivity(i);
+        }
     }
 
     private fun getUserData() {
