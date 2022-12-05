@@ -43,6 +43,7 @@ class LoginPresenterImpl(
 
     override fun exitAccount(email: String, password: String) {
         auth = FirebaseAuth.getInstance()
+        //todo
 
         //databaseReference = FirebaseDatabase.getInstance().reference
 
@@ -55,7 +56,7 @@ class LoginPresenterImpl(
                             coroutineContext.let {
                                 view.retrieveUserDataFromFireBase(email, password)
 
-                                //Thread.sleep(2000)
+                                Thread.sleep(2000)
 
                                 view.enterToHomeActivity()
                                 view.setTextViewError(R.string.empty)
