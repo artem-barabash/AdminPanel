@@ -18,10 +18,9 @@ import com.example.adminpanel.data.utilities.room.UserDataApplication
 import com.example.adminpanel.domain.presenter.HomeFragmentContract
 import com.example.adminpanel.domain.use_cases.UserFactory.Companion.ACCOUNT
 import com.example.adminpanel.presentation.adapter.PersonAdapter
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.text.NumberFormat
 import java.util.*
 import kotlin.coroutines.coroutineContext
@@ -69,7 +68,15 @@ class HomeFragment() : Fragment(), HomeFragmentContract.View {
 
         textNumber.text = showCardNumber(ACCOUNT.number)
         textFullName.text = "${ACCOUNT.firstName} ${ACCOUNT.lastName}"
-        textBalance.text = NumberFormat.getCurrencyInstance(Locale.US).format(ACCOUNT.balance)
+
+        runBlocking {
+            launch {
+                getBalance().collect{ textBalance.text = it}
+                //textBalance.text = NumberFormat.getCurrencyInstance(Locale.US).format(ACCOUNT.balance)
+            }
+
+        }
+
 
 
 
@@ -97,6 +104,10 @@ class HomeFragment() : Fragment(), HomeFragmentContract.View {
         super.onViewCreated(view, savedInstanceState)
 
 
+    }
+
+    private fun getBalance(): Flow<String> = flow {
+        emit(NumberFormat.getCurrencyInstance(Locale.US).format(ACCOUNT.balance))
     }
 
     private fun showCardNumber(number: String?): String? {

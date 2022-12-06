@@ -41,6 +41,10 @@ class LoginPresenterImpl(
 
    lateinit var auth: FirebaseAuth
 
+   public fun todo():Int{
+       return 2+2
+   }
+
     override fun exitAccount(email: String, password: String) {
         auth = FirebaseAuth.getInstance()
         //todo
