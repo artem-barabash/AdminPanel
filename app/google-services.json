@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "268493063195",
+    "firebase_url": "https://example-6faae-default-rtdb.firebaseio.com",
+    "project_id": "example-6faae",
+    "storage_bucket": "example-6faae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:268493063195:android:618b4a8a87f94e71ba64be",
+        "android_client_info": {
+          "package_name": "com.example.adminpanel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "268493063195-unpimsfq1acd443kavp566c9h0mv5iet.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5YerYnOlxRfS4QTntl_mUHtsT-B5j0Vc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "268493063195-unpimsfq1acd443kavp566c9h0mv5iet.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:268493063195:android:cde9a03474ab88e5ba64be",
+        "android_client_info": {
+          "package_name": "com.example.financeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "268493063195-unpimsfq1acd443kavp566c9h0mv5iet.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5YerYnOlxRfS4QTntl_mUHtsT-B5j0Vc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "268493063195-unpimsfq1acd443kavp566c9h0mv5iet.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:268493063195:android:d3aac36075f47da1ba64be",
+        "android_client_info": {
+          "package_name": "com.example.moneyapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "268493063195-unpimsfq1acd443kavp566c9h0mv5iet.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5YerYnOlxRfS4QTntl_mUHtsT-B5j0Vc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "268493063195-unpimsfq1acd443kavp566c9h0mv5iet.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

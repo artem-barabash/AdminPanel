@@ -1,0 +1,44 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name" translatable="false">Admin Panel</string>
+
+    <string name="enter_email">Enter email</string>
+    <string name="enter_password">Enter password</string>
+    <string name="log_in">Login</string>
+    <string name="failure_auth">Login or password is not correctly!</string>
+    <string name="message_empty_fields">Fields can not be empty!</string>
+    <string name="empty" translatable="false" />
+
+    <string name="home_menu_item">Home</string>
+    <string name="transactions_menu_item">Transactions</string>
+
+    <string name="available_text">Available Balance</string>
+    <string name="users_txt">Users</string>
+
+    <string name="transfer_header">Transfer</string>
+    <string name="from_text">From</string>
+    <string name="account_txt">Account</string>
+    <string name="to_txt">To</string>
+    <string name="amount_txt">Amount</string>
+    <string name="purpose_txt">Purpose</string>
+    <string name="send_btn_txt">Send</string>
+
+    <string name="failure_payment">The sum is incorrect!</string>
+
+    <string name="recipient_number_title">Recipient\'s number</string>
+    <string name="transaction_successful">Transaction Successful</string>
+    <string name="detail_transaction">Detail Transaction</string>
+    <string name="share_receipt">Share Receipt</string>
+    <string name="btn_done">Done</string>
+
+    <string name="text_сaption_votings" translatable="false">Votings</string>
+
+    <string name="add_question" translatable="false">Add Question</string>
+
+    <string name="enter_question" translatable="false">Enter question...</string>
+
+    <string name="add_variant" translatable="false">Add Variant</string>
+    <string name="add_item" translatable="false">Add</string>
+    <string name="fill_form" translatable="false">Fill out the form completely!</string>
+
+    <string name="close_question" translatable="false" tools:ignore="ExtraTranslation">Close Question</string>
+</resources>

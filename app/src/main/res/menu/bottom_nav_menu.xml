@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/itemHome"
+        android:icon="@drawable/ic_home"
+        android:title="@string/home_menu_item"/>
+
+    <item
+        android:id="@+id/itemTransactions"
+        android:icon="@drawable/ic_transactions"
+        android:title="@string/transactions_menu_item"/>
+
+    <item
+        android:id="@+id/itemVotings"
+        android:icon="@drawable/ic_baseline_how_to_vote_24"
+        android:title="@string/text_сaption_votings"/>
+</menu>
