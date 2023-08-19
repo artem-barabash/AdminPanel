@@ -11,10 +11,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
-            <!-- TODO: Update blank fragment layout -->
+        <!-- TODO: Update blank fragment layout -->
 
         <TextView
             android:id="@+id/caption_home"
@@ -96,8 +95,9 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/constraintLayout"
+            android:layout_width="409dp"
+            android:layout_height="252dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
@@ -113,6 +113,7 @@
                 android:textColor="@color/txt_color_2"
                 android:textSize="20sp"
                 app:fontFamily="@font/poppins_medium"
+                app:layout_constraintBottom_toTopOf="@+id/users_recycler_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -120,7 +121,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/users_recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

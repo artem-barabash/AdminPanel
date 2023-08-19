@@ -41,4 +41,6 @@
     <string name="fill_form" translatable="false">Fill out the form completely!</string>
 
     <string name="close_question" translatable="false" tools:ignore="ExtraTranslation">Close Question</string>
+    <string name="already_close">Question was closed already</string>
+    <string name="is_closed">Question is closed</string>
 </resources>

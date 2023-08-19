@@ -31,7 +31,6 @@ class VotingPageFragment : Fragment(), VotingPageFragmentContract.View {
     lateinit var textTitle:TextView
     lateinit var textTime:TextView
 
-    lateinit var variantsViewAdapter: VarViewAdapter
     lateinit var recyclerView: RecyclerView
 
     lateinit var textSumVoting: TextView
@@ -68,11 +67,15 @@ class VotingPageFragment : Fragment(), VotingPageFragmentContract.View {
 
         buttonCloseQuestion = view.buttonClose
 
+        println("question=$question")
+
         textTitle.text = question!!.textQuestion
         textTime.text = "The question is opened " + presenter.parseDate(question!!.time)
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
+        buttonCloseQuestion.isClickable = question!!.isOpen
+        buttonCloseQuestion.setText(if(!question!!.isOpen)R.string.already_close else R.string.close_question)
 
         presenter.getAllStatisticsOnQuestion(question!!.number)
             .observe(viewLifecycleOwner, Observer {list ->
@@ -86,15 +89,16 @@ class VotingPageFragment : Fragment(), VotingPageFragmentContract.View {
                             quality
                         )
                     }
-
                 }
-
-
         })
 
         buttonCloseQuestion.setOnClickListener {
-            presenter.closeQuestion(question!!.number)
-            Toast.makeText(this.context, "Question is closed", Toast.LENGTH_SHORT).show()
+            if(question!!.isOpen){
+                presenter.closeQuestion(question!!.number)
+                Toast.makeText(this.context, R.string.is_closed, Toast.LENGTH_SHORT).show()
+                buttonCloseQuestion.setText(R.string.already_close)
+                buttonCloseQuestion.isClickable = false
+            }
         }
 
         return view

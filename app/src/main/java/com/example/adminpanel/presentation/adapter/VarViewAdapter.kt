@@ -32,9 +32,12 @@ class VarViewAdapter(
 
         val sumAndPercent:Double =  (item.quality.toDouble() / sum) * 100.00
 
-        holder.textVariant.text = item.textAnswer
-        holder.textQuality.text = "${item.quality} - "+
-                String.format("%.2f", sumAndPercent) + "%"
+        if(item.quality != 0){
+            holder.textQuality.text = "${item.quality} - "+
+                    String.format("%.2f", sumAndPercent) + "%"
+        }else{
+            holder.textQuality.text = "0 - 0%"
+        }
     }
 
     override fun getItemCount(): Int {
